@@ -1,15 +1,17 @@
 package advanced
 
-object  DarkSugars extends App {
+import scala.util.Try
+
+object DarkSugars extends App {
 
   def singleArgMethod(arg: Int): String = s"$arg little ducks..."
 
-  val description = singLeArgMethod {
+  val description = singleArgMethod {
     42
   }
 
-  val aTryInstance Try {
-    thorw new RuntimeException
+  val aTryInstance = Try {
+    throw new RuntimeException
   }
 
   List(1,2,3).map { x =>
@@ -41,7 +43,7 @@ object  DarkSugars extends App {
     def f(a: Int): Unit
   }
 
-  val anAbstractInstance: AnAbstractType = (a: Int)a => println("sweet")a
+  val anAbstractInstance: AnAbstractType = (a: Int) => println("sweet")
 
   val prependedList = 2 :: List(3, 4)
 
@@ -64,7 +66,7 @@ object  DarkSugars extends App {
 
   // syntax sugar #5: infix types
   class Composite[A, B]
-  val compositte: Int Compositte String = ???
+  val compositte: Int Composite String = ???
 
   class -->[A, B]
   val towards: Int --> String = ???
@@ -78,13 +80,13 @@ object  DarkSugars extends App {
   class Mutable {
     private var internalMember: Int = 0
     def member = internalMember // "getter"
-    def member_={value: Int) Unit =
+    def member_(value: Int): Unit =
         internalMember = value // "setter"
   }
 
 
+  // TODO: Check Setter
   val aMutableContainer = new Mutable
-  aMutableContainer.member = 42 // rewriterm as aMutableContainer.
+  aMutableContainer.member_() = 42 // rewriterm as aMutableContainer.
 
-  }
 }

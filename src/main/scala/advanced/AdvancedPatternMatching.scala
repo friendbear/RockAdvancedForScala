@@ -84,7 +84,7 @@ object AdvancedPatternMatching extends App {
     def head: A = ???
     def tail: MyList[A] = ???
   }
-  case object Empty extends MyList[Notiong]
+  case object Empty extends MyList[Nothing]
   case class Cons[+A](override val head: A, override val tail: MyList[A]) extends MyList[A]
 
   object MyList {

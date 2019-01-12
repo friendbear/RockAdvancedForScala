@@ -28,7 +28,7 @@ trait MySet[A] extends (A => Boolean) {
 
   // EXECISE #3
   // set[1, 2, 3] => implement a unary_! = NEGATION of a set
-  def unary_1! : MySet[A]
+  def unary_! :MySet[A]
 }
 
 class EmptySet[A] extends MySet[A] {
@@ -46,9 +46,7 @@ class EmptySet[A] extends MySet[A] {
   def --(anoterSet: MySet[A]): MySet[A] = this
   def &(anotherSet: MySet[A]): MySet[A] = this
   
-  def unary_1! : MySet[A]  = new MySet[A] {
-
-  }
+  def unary_! :MySet[A]  = ???
 }
 
 class NonEmptySet[A](head: A, tail: MySet[A]) extends MySet[A] {
@@ -87,17 +85,17 @@ class NonEmptySet[A](head: A, tail: MySet[A]) extends MySet[A] {
     if ( head == elem) tail
     else tail - elem + head
 
-  def --(anoterSet: MySet[A]): MySet[A] = filter(x => !anotherSet(x))
-  def &(anoterSet: MySet[A]): MySet[A] = filter(x => anotherSet.contains(x)) //intersection = filtering!
+  def --(anotherSet: MySet[A]): MySet[A] = filter(x => !anotherSet(x))
+  def &(anotherSet: MySet[A]): MySet[A] = filter(x => anotherSet.contains(x)) //intersection = filtering!
 
   // new operator
-  def unary_! : MySet[A]
+  def unary_! : MySet[A] = ???
 }
 object MySet {
 
   def apply[A](values: A*): MySet[A] = {
 
-    //@trailrec
+    @annotation.tailrec
     def buildSet(valSeq: Seq[A], acc: MySet[A]): MySet[A] =
       if (valSeq.isEmpty) acc
       else buildSet(valSeq.tail, acc + valSeq.head)

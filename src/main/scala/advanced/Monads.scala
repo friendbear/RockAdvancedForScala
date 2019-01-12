@@ -51,7 +51,7 @@ object Monads extends App {
    * Success(v).flatMap(f).flatMap(g) =
    *   f(v).flatMap(g) OR Fail(e)
    *
-   *   Sccess(v).flatMap(x => f(x).flatMap(g)) =
+   * Success(v).flatMap(x => f(x).flatMap(g)) =
    *   f(v).flatMap(g) OR Fail(e)
    */
 
@@ -63,7 +63,7 @@ object Monads extends App {
 
   /*
    * EXERCISE:
-   * 1) impliment a Lazy[T] monad = computation whitch will only be executed when its neede.
+   * 1) impliment a Lazy[T] monad = computation which will only be executed when its neede.
    * unit/apply
    * flatMap
    *
