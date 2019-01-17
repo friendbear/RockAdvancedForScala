@@ -12,7 +12,7 @@ Rock the JVM! Advanced Scala and Functional Programming
 <summary>Future Map</summary>
 <pre>
 <code>
-}
+def someone = ???
 </code>
 
 <code>
