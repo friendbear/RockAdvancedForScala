@@ -34,7 +34,7 @@ object DarkSugars extends App {
   val aThreaed = new Thread(new Runnable {
     override def run(): Unit = println("Hello, Scala")
 
-  })a
+  })
 
   val aSweeterThread = new Thread(() => println("sweet, Scala!"))
 
@@ -74,7 +74,7 @@ object DarkSugars extends App {
 
   // syntax sugar #6: update() is very special, mach like apply()
   val anArray = Array(1, 2, 3)
-  anArray(2) = 7 // rewriteen to anArray.update(2, 7)
+  anArray(2) = 7 // rewrite to anArray.update(2, 7)
   //remember apply() AND update()!
   // setters for mutable containers
   class Mutable {
@@ -87,6 +87,6 @@ object DarkSugars extends App {
 
   // TODO: Check Setter
   val aMutableContainer = new Mutable
-  aMutableContainer.member_() = 42 // rewriterm as aMutableContainer.
+  // TODO: aMutableContainer.member = 42 // rewriterm as aMutableContainer.
 
 }
