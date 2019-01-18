@@ -20,12 +20,12 @@ object CurriesPAF extends App {
   def inc(x: Int) = x + 1
   List(1,2,3).map(x =>inc(x))
 
-  // Parthial function applications
+  // PartialFunction function applications
   val add5 = curriedAdder(5) _ // Int => Int
 
   // EXERCISE
   val simpleAddFunction = (x: Int, y: Int) => x + y
-  def simleAddMethod = (x: Int, y: Int) => x + y
+  def simpleAddMethod = (x: Int, y: Int) => x + y
   def curriedAddMethod(x: Int)(y: Int) = x + y
 
   // add7:
@@ -52,7 +52,7 @@ object CurriesPAF extends App {
   def curriedFormatter(s: String)(number: Double): String = s.format(number)
   val numbers = List(Math.PI, Math.E, 1, 9.8, 1.3e-12)
 
-  val simpleformat = curriedFormatter("%4.2f") _ // lift
+  val simpleFormat = curriedFormatter("%4.2f") _ // lift
   val seriusFormat = curriedFormatter("%8.6f") _
   val preciseFormat = curriedFormatter("%14.12f") _
 
