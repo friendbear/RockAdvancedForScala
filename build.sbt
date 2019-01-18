@@ -3,6 +3,11 @@
 scalaVersion := "2.12.8"
 organization := "friendbear.github.com"
 
+// https://mvnrepository.com/artifact/com.artima.supersafe/supersafe
+libraryDependencies ++= Seq(
+  "com.artima.supersafe" %% "supersafe" % "1.1.7"
+)
+
 lazy val commonSettings = Seq(
   version := "0.1.0"
 )
