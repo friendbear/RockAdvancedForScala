@@ -31,7 +31,7 @@ object AdvancedPatternMatchingSecond extends App {
 
   object MyList {
     def unapplySeq[A](list: MyList[A]): Option[Seq[A]] =
-      if (list == Empty) Some(Seq.empty)
+      if (list == Empty) Some(Seq.empty[A])
       else unapplySeq(list.tail).map(list.head +: _) // 🔵
   }
 

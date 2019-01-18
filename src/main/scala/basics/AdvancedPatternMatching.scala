@@ -76,5 +76,10 @@ object AdvancedPatternMatching extends App {
   }
   println(mathProperty2)
 
-
 }
+/*
+the only element is 1.
+Hi, my name is Bob and I am 25 yo.
+My legal status is major
+single digit
+ */

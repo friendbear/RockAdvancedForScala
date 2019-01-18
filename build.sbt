@@ -19,4 +19,3 @@ lazy val root = (project in file(".")).
     //libraryDependencies ++= ...以下略
   )
 
-

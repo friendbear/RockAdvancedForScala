@@ -65,8 +65,10 @@ object DarkSugars extends App {
   class MyStream[T] {
     def -->:(value: T): MyStream[T] = this //actual implementation here
   }
-  val myStream = 1 -->: 2 -->: 3 -->: new MyStream[Int]
-
+  val myStream1 = 1 -->: 2 -->: 3 -->: new MyStream[Int]
+  val myStream2 =new MyStream[Int].-->:(3).-->:(2).-->:(1)
+  println(myStream1)
+  println(myStream2)
 
   // syntax sugar #4:
   // multi-word method naming
@@ -79,13 +81,14 @@ object DarkSugars extends App {
 
   // syntax sugar #5:
   // generics infix types
+  /*
   class Composite[A, B]
   val composite: Int Composite String = ???
   val composite2: Int Composite String = ???
 
   class -->[A, B]
   val towards: Int --> String = ???
-
+  */
 
   // syntax sugar #6:
   // update() is very special, mach like apply()
@@ -104,6 +107,6 @@ object DarkSugars extends App {
   }
 
   val aMutableContainer = new Mutable
-  aMutableContainer.member = 42 // rewriterm as aMutableContainer.
+  aMutableContainer.member = 42 // rewritem as aMutableContainer.
 
 }
