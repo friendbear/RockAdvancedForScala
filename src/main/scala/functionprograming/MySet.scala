@@ -65,7 +65,7 @@ class NonEmptySet[A](head: A, tail: MySet[A]) extends MySet[A] {
     if (this contains elem) this
     else new NonEmptySet[A] (elem, this)
 
-  /**
+  /*
    * [1 2 3] ++ [4 5] =
    * [2 3] ++ [4 5] + 1 =
    * [3] ++ [4 5] + 1 + 2 =
@@ -112,7 +112,7 @@ object MySet {
     def buildSet(valSeq: Seq[A], acc: MySet[A]): MySet[A] =
       if (valSeq.isEmpty) acc
       else buildSet(valSeq.tail, acc + valSeq.head)
-    buildSet(values.toSeq, new EmptySet[A])
+    buildSet(values.toSeq, new EmptySet[A]) // Point
   }
 }
 
