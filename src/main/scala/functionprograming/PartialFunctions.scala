@@ -4,6 +4,15 @@ package functionprograming
   * A Taste of Advanced Scala
   *
   * Partial Functions : Advanced Functional Programming
+  *
+  * trait PartialFunction[-A, +B] extends (A => B) {
+  *   def apply(x: A): B
+  *   def isDefinedAt(x: A): Boolean
+  * }
+  * Utilities:
+  * - isDefinedAt
+  * - lift
+  * - orElse
   */
 object PartialFunctions extends App {
 
