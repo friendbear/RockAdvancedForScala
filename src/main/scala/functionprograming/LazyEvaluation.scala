@@ -5,7 +5,7 @@ package functionprograming
   * A Taste of Advanced Scala
   * AdvancedFunctional Programing
   *
-  * - Curring and Partially Applied Function
+  * - Lazy Evaluation
   *   - only evaluated once
   *   - filter vs withFilter(lazy)
   */
