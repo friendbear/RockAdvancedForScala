@@ -48,6 +48,9 @@ object DarkSugars extends App {
     def implemented: Int = 23
     def f(a: Int): Unit
   }
+  val anAbstractInstance2: AnAbstractType = new AnAbstractType {
+    override def f(a: Int): Unit = println("sweet")
+  }  // =>
   val anAbstractInstance: AnAbstractType = (a: Int) => println("sweet")
 
 
@@ -108,5 +111,4 @@ object DarkSugars extends App {
 
   val aMutableContainer = new Mutable
   aMutableContainer.member = 42 // rewritem as aMutableContainer.
-
 }

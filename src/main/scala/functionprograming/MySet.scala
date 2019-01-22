@@ -9,7 +9,7 @@ package functionprograming
   */
 trait MySet[A] extends (A => Boolean) {
 
-  def apply(elem: A): Boolean =  // A => Boolean implement. 🔴
+  def apply(elem: A): Boolean =  // (A => Boolean) implement. 🔴
     contains(elem)
 
   /*

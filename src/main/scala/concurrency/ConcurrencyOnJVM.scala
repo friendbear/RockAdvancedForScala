@@ -101,40 +101,43 @@ object ConcurrencyOnJVM extends App {
   /*
    * 2
    */
-  var x = 0
-  val threads = (1 to 100).map(_ => new Thread(() => x += 1))
-  threads.foreach(_.start())
+  {
+    var x = 0
+    val threads = (1 to 100).map(_ => new Thread(() => x += 1))
+    threads.foreach(_.start())
 
-  /*
-   * 1) what is the biggest value possible for x? 100
-   * 2) what is the  SMALLEST value possible for x? 1
-   *
-   * thread1: x = 0
-   * thread2: x = 0
-   * ....
-   * thread100: x = 0
-   *
-   * for all threads: x = 1 and write it back to x
-   */
+    /*
+     * 1) what is the biggest value possible for x? 100
+     * 2) what is the  SMALLEST value possible for x? 1
+     *
+     * thread1: x = 0
+     * thread2: x = 0
+     * ....
+     * thread100: x = 0
+     *
+     * for all threads: x = 1 and write it back to x
+     */
 
-  println(x)
-  threads.foreach(_.join())
-  println(x)
+    println(x)
+    threads.foreach(_.join())
+    println(x)
+  }
 
   /*
    * 3 sleep fallacy
    */
-  var message = ""
-  val awesomeThread = new Thread(() => {
-    Thread.sleep(1000)
-    message = "Scala is awesome"
-  })
-  message = "Scala sucks"
-  awesomeThread.start()
-  Thread.sleep(2000)
-  awesomeThread.join() // wait for the awesome thread to join
-  println(message)
-  /*
+  {
+    var message = ""
+    val awesomeThread = new Thread(() => {
+      Thread.sleep(1000)
+      message = "Scala is awesome"
+    })
+    message = "Scala sucks"
+    awesomeThread.start()
+    Thread.sleep(2000)
+    awesomeThread.join() // wait for the awesome thread to join
+    println(message)
+    /*
     what's the value of message? almost always " Scala is awesome"
     is it guaranteed? NO!
     why? why not?
@@ -149,9 +152,10 @@ object ConcurrencyOnJVM extends App {
       println("Scala sucks")
     (OS gives the CPU to awesomeThread)
       message = "Scala is awesome"
-   */
+    */
 
-  // how to we fix this!
-  // syncrhonizing  dose Not work
+    // how to we fix this!
+    // syncrhonizing  dose Not work
+  }
 
 }
