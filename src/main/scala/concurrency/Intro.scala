@@ -28,12 +28,10 @@ object Intro extends App {
     // create a JVM thread => OS thread
     new Thread(() => println("Running parallel")).start()
 
-    //
     // run
     runnable.run() // does't do anything in parallel!
 
     aThread.join() // blocks until aThread finishes running
-
 
     val threadHello = new Thread(() => (1 to 5).foreach(_ => println("hello")))
     val threadGoodbye = new Thread(() => (1 to 5).foreach(_ => println("goodbye")))
