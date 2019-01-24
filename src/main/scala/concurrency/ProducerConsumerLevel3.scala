@@ -8,6 +8,8 @@ import scala.util.Random
   * Functional Concurrent Programming
   *
   * - Producer-Consumer, Level3
+  *
+  * notify -> notifyAll
   */
 object ProducerConsumerLevel3 extends App {
 
@@ -56,7 +58,7 @@ object ProducerConsumerLevel3 extends App {
           println(s"[consumer $id] consumed " + x)
 
           // hey producer, there's empty space available, are you lazy?
-          buffer.notify()
+          buffer.notifyAll()
         })
 
         Thread.sleep(random.nextInt(500))
@@ -79,7 +81,7 @@ object ProducerConsumerLevel3 extends App {
           buffer.enqueue(i)
 
           //todo hey consumer, new food for you!
-          buffer.notify()
+          buffer.notifyAll()
           i += 1
         }
         Thread.sleep(random.nextInt(500))
