@@ -1,16 +1,16 @@
 package implicits
 
-/**
-  * A Taste of Advanced Scala
+/** A Taste of Advanced Scala
   * AdvancedFunctional Programing
   *
   * - TypeClasses
   *   - trait HTMLSerializer[T] vs trait HTMLWritable
   *   - TYPE CLASS
-  *
+  *    {{{
   *     trait MyTypeClassTemplate[T] {
   *       def action(value: T): String
   *     }
+  *    }}}
   */
 object TypeClasses extends App {
 
@@ -47,7 +47,7 @@ object TypeClasses extends App {
       s"<div>${user.name} (${user.age} yo) <a href=${user.email}/></div"
   }
 
-  val john = User("John", 32, " john@rockthejvm.com")
+  val john = User("John", 32, "john@rockthejvm.com")
   println(UserSerializer.serialize(john))
 
   // 1 - we can define serializers for other types
