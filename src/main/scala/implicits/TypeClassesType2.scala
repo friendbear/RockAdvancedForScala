@@ -53,7 +53,7 @@ object TypeClassesType2 extends App {
     println(HTMLSerializer.serialize(john))
 
     // access to the entire type class interface
-    println(HTMLSerializer[User].serialize(john)) // HTMLSerializer[T].apply
+    println(HTMLSerializer[User].serialize(john)) // HTMLSerializer[T].apply.serialize
 
     /*
     <div style: color=blue>42</div
@@ -71,9 +71,11 @@ object TypeClassesType2 extends App {
   object MyTypeClassTemplate {
     def apply[T](implicit instance: MyTypeClassTemplate[T]) = instance
   }
+
   /**
     * Equality
     */
+  // TYPE CLASS
   trait Equal[T] {
     def apply(a: T, b: T): Boolean
   }
@@ -92,7 +94,7 @@ object TypeClassesType2 extends App {
     val ken = User("Ken", 32, " ken@rockthejvm.com")
     val bob = User("Bob", 42, " bob@rockthejvm.com")
 
-    Equal(bob, ken)(NameEquality)
+    Equal.apply(bob, ken)(NameEquality)
     Equal(bob, ken)(FullEquality)
 
     // AD-HOC polymorphism
