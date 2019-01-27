@@ -101,7 +101,20 @@ object TypeClassesType2 extends App {
     // access to the entire type class interface
     println(HTMLSerializer[User].serialize(john)) // HTMLSerializer[T].apply.serialize
 
+  }
 
+  val testCode2 = {
+    val ken = User("Ken", 32, " ken@rockthejvm.com")
+    val bob = User("Bob", 42, " bob@rockthejvm.com")
+
+    Equal.apply(bob, ken)(NameEquality)
+    Equal(bob, ken)(FullEquality)
+
+    // AD-HOC polymorphism
+    println(Equal(bob, ken)) // implicit object NameEquality
+  }
+
+  val testCode3 = {
     println(john.toHTML(UserSerializer)) // println(new HTMLEnrichment[User](john).toHTML
     println(john.toHTML) // println(new HTMLEnrichment[User](john).toHTML
     // COOL !
@@ -117,17 +130,4 @@ object TypeClassesType2 extends App {
     println(htmlBoilerplate(john)(HTMLSerializer[User]))
     println(htmlSugar(john))
   }
-
-  val testCode2 = {
-    val ken = User("Ken", 32, " ken@rockthejvm.com")
-    val bob = User("Bob", 42, " bob@rockthejvm.com")
-
-    Equal.apply(bob, ken)(NameEquality)
-    Equal(bob, ken)(FullEquality)
-
-    // AD-HOC polymorphism
-    println(Equal(bob, ken)) // implicit object NameEquality
-  }
-
-
 }
