@@ -2,7 +2,7 @@ package exercises
 
 import implicits.TypeClassesType2.{User}
 
-object EqualityPlayground {
+object EqualityPlayground extends App {
 
   /**
     * Equality
@@ -33,17 +33,16 @@ object EqualityPlayground {
     def !==(another: T)(implicit equalizer: Equal[T]): Boolean = ! equalizer.apply(value, another)
   }
 
-  val john = User("Jon", 44, "jon@example.com")
-  val anotherJohn = User("Jon", 44, "jon@example.com")
+  val testCode1 = {
+    val john = User("Jon", 44, "jon@example.com")
+    val anotherJohn = User("Jon", 44, "jon@example.com")
 
-  println(john === anotherJohn)
-  /*
+    println(john === anotherJohn) // => true
+    /*
     john.===(anotherJohn)
     new TypeSafeEqual[User](john).===(anotherJohn)
     new TypeSafeEqual[User](john).===(anotherJohn)(NameEquality)
-   */
-  /*
-    TYPE SAFE
-   */
+     */
+  }
 
 }
