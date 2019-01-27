@@ -1,5 +1,6 @@
 package implicits
 
+import exercises.EqualityPlayground._
 
 /** A Taste of Advanced Scala
   * AdvancedFunctional Programing
@@ -19,6 +20,8 @@ package implicits
   *
   *   // AD-HOC polymorphism
   *   Equal(bobInstance, jonInstance) => false
+  *
+  * - TypeClasses, Part 3
   */
 object TypeClassesType2 extends App {
 
@@ -45,49 +48,74 @@ object TypeClassesType2 extends App {
       s"<div>${user.name} (${user.age} yo) <a href=${user.email}/></div"
   }
 
-  val testCode1 = {
-    println(HTMLSerializer.serialize(42)(IntSerializer))
-    println(HTMLSerializer[Int].serialize(42))
-
-    val john = User("John", 32, "john@rockthejvm.com")
-    println(HTMLSerializer.serialize(john))
-
-    // access to the entire type class interface
-    println(HTMLSerializer[User].serialize(john)) // HTMLSerializer[T].apply.serialize
-
-    /*
-    <div style: color=blue>42</div
-    <div style: color=blue>42</div
-    <div>John (32 yo) <a href=john@rockthejvm.com/></div
-    <div>John (32 yo) <a href=john@rockthejvm.com/></div
-     */
+  // 1 - we can define serializers for other types
+  import java.util.Date
+  object DateSerializer extends HTMLSerializer[Date] {
+    override def serialize(date: Date): String = s"<div>${date.toString()}</div>"
   }
 
+  // 2 - we can define MULTIPLE serializers
+  object PartialUserSerializer extends HTMLSerializer[User] {
+    def serialize(user: User): String = s"<div>${user.name}</div>"
+  }
 
   // TYPE CLASS
   trait MyTypeClassTemplate[T] {
     def action(value: T): String
   }
-  object MyTypeClassTemplate {
-    def apply[T](implicit instance: MyTypeClassTemplate[T]) = instance
+
+  // part 3
+  implicit class HTMLEnrichment[T](value: T) {
+    def toHTML(implicit serializer: HTMLSerializer[T]): String = serializer.serialize(value)
   }
 
-  /**
-    * Equality
-    */
-  // TYPE CLASS
-  trait Equal[T] {
-    def apply(a: T, b: T): Boolean
-  }
-  object Equal {
-    def apply[T](a: T, b: T)(implicit equalizer: Equal[T]): Boolean =
-      equalizer.apply(a, b)
-  }
-  implicit object NameEquality extends Equal[User] {
-    override def apply(a: User, b: User): Boolean = a.name == b.name
-  }
-  object FullEquality extends Equal[User] {
-    override def apply(a: User, b: User): Boolean = a.name == b.name && a.email == b.email
+  /*
+    - type class itself -- HTMLSerializer[T] { .. }
+    - type class instances (some of which are implicit)  --- UserSerializer, IntSerializer
+    - conversion with implicit classes
+   */
+  // context bounds
+  def htmlBoilerplate[T](content: T)(implicit serializer: HTMLSerializer[T]): String =
+    s"<html><body> ${content.toHTML(serializer)} </body></html>"
+
+  def htmlSugar[T : HTMLSerializer](content: T): String = {
+     val serializer = implicitly[HTMLSerializer[T]]
+     // use serializer
+     s"<html><body> ${content.toHTML(serializer)}</body></html>"
+   }
+
+  // implicitly
+  case class Permissions(mask: String)
+  implicit val defaultPermissions: Permissions = Permissions("0744")
+
+  // in some other part of the code
+  val standardPerms = implicitly[Permissions](defaultPermissions)
+
+  val john = User("John", 32, "john@rockthejvm.com")
+  val testCode1 = {
+    println(HTMLSerializer.serialize(42)(IntSerializer))
+    println(HTMLSerializer[Int].serialize(42))
+
+    println(HTMLSerializer.serialize(john))
+
+    // access to the entire type class interface
+    println(HTMLSerializer[User].serialize(john)) // HTMLSerializer[T].apply.serialize
+
+
+    println(john.toHTML(UserSerializer)) // println(new HTMLEnrichment[User](john).toHTML
+    println(john.toHTML) // println(new HTMLEnrichment[User](john).toHTML
+    // COOL !
+
+    /*
+     - extend to new types
+     - choose implementation
+     - super expressive!
+     */
+    println(2.toHTML)
+    println(john.toHTML(PartialUserSerializer))
+
+    println(htmlBoilerplate(john)(HTMLSerializer[User]))
+    println(htmlSugar(john))
   }
 
   val testCode2 = {
@@ -100,4 +128,6 @@ object TypeClassesType2 extends App {
     // AD-HOC polymorphism
     println(Equal(bob, ken)) // implicit object NameEquality
   }
+
+
 }
