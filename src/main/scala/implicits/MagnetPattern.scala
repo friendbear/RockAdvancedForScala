@@ -134,7 +134,7 @@ object MagnetPattern extends App {
     4 - call by name  doesn't work correctly
     (exercise: prove it!) (hint; side effects
    */
-  class Hander {
+  class Handler {
     def handle(s: => String): Unit = {
       println(s)
       println(s)

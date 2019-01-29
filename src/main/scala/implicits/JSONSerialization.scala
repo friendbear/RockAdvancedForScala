@@ -1,4 +1,4 @@
-  package implicits
+package implicits
 
 import java.util.Date
 /**
