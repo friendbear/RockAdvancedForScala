@@ -2,7 +2,7 @@ package typesystem
 
 /**
   * A Taste of Advanced Scala
-  * AdvancedFunctional Programing
+  * Mastering the Type System
   *
   * - Variance
   *   Big rule
