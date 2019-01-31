@@ -22,13 +22,16 @@ object StructuralTypes extends App {
   def closeQuietly(unifiedCloseable: UnifiedCloseable): Unit = unifiedCloseable.close()
 
   closeQuietly(new JavaCloseable {
-    override def close(): Unit = ???
+    override def close(): Unit = println("JavaCloseable close")
   })
   closeQuietly(new HipsterCloseable)
 
 
   // TYPE REFINEMENTS java Closeable + closeSilently
   type AdvancedCloseable = JavaCloseable {
+    def closeSilently(): Unit
+  }
+  type AdvancedCloseable2 = java.io.Closeable {
     def closeSilently(): Unit
   }
   class AdvancedJavaCloseable extends JavaCloseable {
