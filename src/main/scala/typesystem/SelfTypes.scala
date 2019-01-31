@@ -65,7 +65,7 @@ object SelfTypes extends App {
   class ComponentB extends Component
   class DependentComponent(val component: Component)
 
-  // CAKE PATTERN
+  // 🔵 CAKE PATTERN => "dependency injection"🔵
   trait ScalaComponent {
     // API
     def action(x: Int): String
@@ -85,6 +85,7 @@ object SelfTypes extends App {
 
   // layer 3 - app
   trait AnalyticsApp extends ScalaApplication with Analytics
+  trait ProfileApp extends ScalaApplication with Profile
 
   // cyclical dependencies
   // class X extends Y
