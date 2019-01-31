@@ -45,8 +45,12 @@ object StructuralTypes extends App {
   // closeShh(new HipsterCloseable) => compile error
 
   // using structural types as standalone types
-  // oun type
+  // oun type 🔴 this is same UnifiedCloseable
   def altClose(closeable: {def close(): Unit}): Unit = closeable.close()
+  def altCloseSilently(closeable: {def closeSilently(): Unit}): Unit = closeable.closeSilently()
+
+  altClose(new HipsterCloseable)
+  altCloseSilently(new HipsterCloseable)
 
   // type-checking => dock typing
   type SoundMaker = {
@@ -60,7 +64,16 @@ object StructuralTypes extends App {
     def makeSound(): Unit = println("yroooom!")
   }
 
-  // static duck typing
+  // static duck typing 🔴
+  /*
+    Postfix operator notation: val s = 123 toString
+    Reflective call: def foo(v: {def bar()}) = v.bar()
+    Dynamic member selection: class Foo extends Dynamic
+    Implicit conversion: implicit def toInt(s: String) = s.toInt
+    Higher-kinded type: class Bar[M[A]]
+    Existential type: def foo(v: Seq[T] forSome { type T })
+    Macro definition: def assert(s: String) = macro Asserts.assertImpl
+   */
   val doc: SoundMaker = new Dog // runtime structure type use reflection
   val car: SoundMaker = new Car
 
