@@ -1,3 +1,4 @@
+![scala-spiral](scala-spiral.png)
 # Scala Advanced
 [![Travis Build Status](https://travis-ci.org/friendbear/RockAdvancedForScala.svg?branch=master)](https://travis-ci.org/friendbear/RockAdvancedForScala)
 [![CircleCI](https://circleci.com/gh/friendbear/RockScalaForAdvanced.svg?style=svg)](https://circleci.com/gh/friendbear/RockScalaForAdvanced)
